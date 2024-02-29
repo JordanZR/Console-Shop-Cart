@@ -1,7 +1,32 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import classes.Producto
 fun main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Esto es una prueba")
+    // Crear la lista mutable de productos
+    val listaProductos = mutableListOf<Producto>()
+
+    // Agregar 10 productos a la lista
+    agregarProductos(listaProductos)
+
+    // Mostrar la lista de productos de manera creativa
+    mostrarListaProductos(listaProductos)
+}
+
+fun agregarProductos(listaProductos: MutableList<Producto>) {
+    // Agregar 10 productos a la lista
+    for (i in 1..5) {
+        val producto = Producto("Producto $i", i * 10.0, i * 5)
+        listaProductos.add(producto)
+    }
+}
+
+fun mostrarListaProductos(listaProductos: List<Producto>) {
+    // Mostrar un encabezado
+    println("Lista de productos:")
+
+    // Iterar sobre la lista de productos y mostrar cada uno de manera creativa
+    for ( producto in listaProductos) {
+        println("Nombre: ${producto.nombre}")
+        println("Precio: $${producto.precio}")
+        println("Cantidad Disponible: ${producto.cantidadDisponible}")
+        println("-----------------------------------------")
+    }
 }
