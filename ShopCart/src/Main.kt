@@ -1,32 +1,44 @@
 import classes.Producto
+import classes.Carrito
 fun main() {
-    // Crear la lista mutable de productos
-    val listaProductos = mutableListOf<Producto>()
+    val carrito = Carrito()
+    val productosIniciales = Producto.agregarProductosIniciales()
 
-    // Agregar 10 productos a la lista
-    agregarProductos(listaProductos)
+    while (true) {
+        // Imprimir los productos iniciales
+        println("\nLista de productos iniciales:")
+        for (producto in productosIniciales) {
+            println("${producto.nombre} - Precio: $${producto.precio} - Disponibles: ${producto.cantidadDisponible}")
+        }
 
-    // Mostrar la lista de productos de manera creativa
-    mostrarListaProductos(listaProductos)
-}
+        println("\nMenú:")
+        println("1. Ver el carrito")
+        println("2. Agregar producto al carrito")
+        println("3. Salir")
 
-fun agregarProductos(listaProductos: MutableList<Producto>) {
-    // Agregar 10 productos a la lista
-    for (i in 1..5) {
-        val producto = Producto("Producto $i", i * 10.0, i * 5)
-        listaProductos.add(producto)
+        print("Seleccione una opción: ")
+        val opcion = readLine()?.toIntOrNull()
+
+        when (opcion) {
+            1 -> carrito.mostrarCarrito()
+            2 -> {
+                println("\nIngrese el nombre del producto a agregar: ")
+                val nombreProducto = readLine().toString()
+                val producto = Producto.buscarProductoPorNombre(nombreProducto)
+                if(producto != null){
+                    carrito.agregarProducto(producto)
+                    carrito.mostrarCarrito()
+                }else{
+                    println("\nPor favor ingrese el nombre del producto correctamente")
+                }
+            }
+            3 -> {
+                println("Saliendo del programa. ¡Hasta luego!")
+                break
+            }
+            else -> println("Opción no válida. Inténtelo de nuevo.")
+        }
     }
 }
 
-fun mostrarListaProductos(listaProductos: List<Producto>) {
-    // Mostrar un encabezado
-    println("Lista de productos:")
 
-    // Iterar sobre la lista de productos y mostrar cada uno de manera creativa
-    for ( producto in listaProductos) {
-        println("Nombre: ${producto.nombre}")
-        println("Precio: $${producto.precio}")
-        println("Cantidad Disponible: ${producto.cantidadDisponible}")
-        println("-----------------------------------------")
-    }
-}

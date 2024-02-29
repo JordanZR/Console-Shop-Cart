@@ -4,14 +4,14 @@ class Carrito {
 
     fun agregarProducto(producto: Producto) {
         items.add(producto)
-        println("${producto.nombre} ha sido añadido al carrito.")
+        println("\n${producto.nombre} ha sido añadido al carrito.")
     }
 
     fun mostrarCarrito() {
         if (items.isEmpty()) {
             println("El carrito está vacío.")
         } else {
-            println("Productos en el carrito:")
+            println("\nProductos en el carrito:")
             for ((index, producto) in items.withIndex()) {
                 println("Indice: ${index + 1}. ${producto.nombre} - Precio: $${producto.precio}")
             }
