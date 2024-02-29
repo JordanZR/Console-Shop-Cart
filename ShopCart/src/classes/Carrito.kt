@@ -6,6 +6,7 @@ class Carrito {
         items.add(producto)
         println("\n${producto.nombre} ha sido añadido al carrito.")
         productos++
+        precioTotal = precioTotal + producto.precio
     }
 
     fun mostrarCarrito() {
@@ -16,15 +17,16 @@ class Carrito {
             val nombresVistos = HashSet<String>()
             for (producto in items) {
                 if (nombresVistos.add(producto.nombre)) {
-                    println("Nombre: ${producto.nombre} - Precio: $${producto.precio} - Cantidad: ${producto.cantidad}")
+                    println("Nombre: ${producto.nombre} - Precio: $${producto.precio} - Cantidad: ${producto.cantidad} - Precio por producto: ${producto.precio} - Precio total: ${producto.precio * producto.cantidad}")
                 }
             }
             println("\nCantidad de productos totales: $productos")
+            println("\nPrecio total: $precioTotal")
         }
     }
 
     companion object{
         var productos:Int = 0
-
+        var precioTotal:Double = 0.0
     }
 }
