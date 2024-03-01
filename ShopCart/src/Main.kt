@@ -25,8 +25,9 @@ fun main() {
             2 -> {
                 println("\nIngrese el nombre del producto a agregar: ")
                 val nombreProducto = readLine().toString()
-                val producto = Producto.buscarProductoPorNombre(nombreProducto)
                 //Revisamos si el producto existe
+                val producto = Producto.buscarProductoPorNombre(nombreProducto)
+
                 if(producto != null){
                     var validador = true
                     while(validador){
@@ -45,7 +46,28 @@ fun main() {
                 }
             }
             3 ->{
+                println("\nIngrese el nombre del producto a eliminar: ")
+                val nombreProducto = readLine().toString()
+                //Revisamos si el producto existe en el carrito
+                val producto = carrito.buscarProductoPorNombre(nombreProducto)
 
+                if(producto != null){
+                    var validador = true
+                    while(validador){
+
+                        println("\nIngrese la cantidad que desea quitar del producto")
+                        val cantidad = readLine()?.toIntOrNull()
+
+                        if(cantidad is Int){
+                            carrito.eliminarProducto(producto, cantidad)
+                            validador = false
+                        }else{
+                            println("\nCantidad invalida")
+                        }
+                    }
+                }else{
+                    println("\nEl nombre del producto no existe, por favor ingreselo correctamente")
+                }
             }
             4 -> {
                 println("\nSaliendo del programa. ¡Hasta luego!")

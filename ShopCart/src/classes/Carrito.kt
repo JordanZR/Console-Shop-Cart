@@ -34,6 +34,29 @@ class Carrito {
         }
     }
 
+    fun eliminarProducto(producto: Producto, cantidad: Int){
+
+        if(cantidad >= producto.cantidad){
+            if(items.removeIf{it.nombre.equals(producto.nombre, ignoreCase = true)}){
+                println("\nProducto fue removido!")
+            }
+        }else{
+            producto.cantidad = producto.cantidad - cantidad
+            println("\nLa cantidad fue removida del producto seleccionado")
+        }
+        //Actualizamos la cantidad y precio total
+        productos = productos - cantidad
+        precioTotal = precioTotal - producto.precio * cantidad
+        mostrarCarrito()
+    }
+
+    fun buscarProductoPorNombre(nombre: String):Producto? {
+        val productoEncontrado = items.find { it.nombre.equals(nombre, ignoreCase = true) }
+        if (productoEncontrado != null) {
+            return productoEncontrado
+        }else{return null}
+    }
+
     companion object{
         var productos:Int = 0
         var precioTotal:Double = 0.0
