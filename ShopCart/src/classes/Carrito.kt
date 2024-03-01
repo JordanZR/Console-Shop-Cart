@@ -5,6 +5,7 @@ class Carrito {
 
         //Vemos si el producto ya fue agregado al carrito
         val revisarProducto = items.find{it.nombre.equals(producto.nombre, ignoreCase = true)}
+
         if(revisarProducto != null){
             //Si el item ya existe en la lista, solo actualizamos la cantidad
             revisarProducto.cantidad = revisarProducto.cantidad + cantidad
@@ -47,8 +48,8 @@ class Carrito {
             }
             println("\nCantidad de productos totales: $productos")
             println("\nPrecio total: $${precioTotal.toFloat()}")
-            println("\nIVA: ${(precioTotal.toFloat() * 0.13).toFloat()}")
-            println("\nPrecio final: ${(precioTotal.toFloat() - precioTotal.toFloat() * 0.13).toFloat()}")
+            println("\nIVA: $${(precioTotal.toFloat() * 0.13).toFloat()}")
+            println("\nPrecio final: $${(precioTotal.toFloat() - precioTotal.toFloat() * 0.13).toFloat()}")
 
             //Eliminamos los productos del carrito
             items.clear()
@@ -60,10 +61,14 @@ class Carrito {
         if(cantidad >= producto.cantidad){
             if(items.removeIf{it.nombre.equals(producto.nombre, ignoreCase = true)}){
                 println("\nProducto fue removido!")
+                productos = productos - producto.cantidad
+                precioTotal = precioTotal - producto.precio * producto.cantidad
             }
         }else{
             producto.cantidad = producto.cantidad - cantidad
             println("\nLa cantidad fue removida del producto seleccionado")
+            productos = productos - cantidad
+            precioTotal = precioTotal - producto.precio * cantidad
         }
         //Actualizamos la cantidad y precio total
         productos = productos - cantidad
