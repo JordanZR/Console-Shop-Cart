@@ -1,2 +1,5 @@
 # Console-Shop-Cart
-Using Kotlin
+
+Video: https://youtu.be/V7zAgBtU8KQ
+
+
