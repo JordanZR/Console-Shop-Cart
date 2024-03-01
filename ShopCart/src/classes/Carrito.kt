@@ -1,12 +1,21 @@
 package classes
 class Carrito {
     private val items: MutableList<Producto> = mutableListOf()
-    fun agregarProducto(producto: Producto) {
-        producto.cantidad++
-        items.add(producto)
+    fun agregarProducto(producto: Producto, cantidad:Int) {
+
+        //Vemos si el producto ya fue agregado al carrito
+        val revisarProducto = items.find{it.nombre.equals(producto.nombre, ignoreCase = true)}
+        if(revisarProducto != null){
+            //Si el item ya existe en la lista, solo actualizamos la cantidad
+            revisarProducto.cantidad = revisarProducto.cantidad + cantidad
+        }else{
+            //Caso contrario, agregamos el producto a la lista
+            producto.cantidad = cantidad
+            items.add(producto)
+        }
         println("\n${producto.nombre} ha sido añadido al carrito.")
-        productos++
-        precioTotal = precioTotal + producto.precio
+        productos = productos + cantidad
+        precioTotal = precioTotal + producto.precio * cantidad
     }
 
     fun mostrarCarrito() {
@@ -17,11 +26,11 @@ class Carrito {
             val nombresVistos = HashSet<String>()
             for (producto in items) {
                 if (nombresVistos.add(producto.nombre)) {
-                    println("Nombre: ${producto.nombre} - Precio: $${producto.precio} - Cantidad: ${producto.cantidad} - Precio por producto: ${producto.precio} - Precio total: ${producto.precio * producto.cantidad}")
+                    println("Nombre: ${producto.nombre} - Precio: $${producto.precio} - Cantidad: ${producto.cantidad} - Precio total: $${(producto.precio * producto.cantidad).toFloat()}")
                 }
             }
             println("\nCantidad de productos totales: $productos")
-            println("\nPrecio total: $precioTotal")
+            println("\nPrecio total: $${precioTotal.toFloat()}")
         }
     }
 

@@ -28,8 +28,18 @@ fun main() {
                 val producto = Producto.buscarProductoPorNombre(nombreProducto)
                 //Revisamos si el producto existe
                 if(producto != null){
-                    carrito.agregarProducto(producto)
-                    carrito.mostrarCarrito()
+                    var validador = true
+                    while(validador){
+                        println("\nIngrese la cantidad que desea del producto")
+                        val cantidad = readLine()?.toIntOrNull()
+                        if(cantidad is Int){
+                            carrito.agregarProducto(producto, cantidad)
+                            carrito.mostrarCarrito()
+                            validador = false
+                        }else{
+                            println("\nCantidad invalida")
+                        }
+                    }
                 }else{
                     println("\nPor favor ingrese el nombre del producto correctamente")
                 }
