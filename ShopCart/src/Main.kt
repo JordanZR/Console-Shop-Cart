@@ -1,7 +1,9 @@
 import classes.Producto
 import classes.Carrito
 fun main() {
+    //Creamos un objeto de la clase Carrito
     val carrito = Carrito()
+    //Ocupamos la función de productos iniciales para obtenerlos y mostrarlos
     val productosIniciales = Producto.agregarProductosIniciales()
 
     while (true) {
@@ -15,7 +17,8 @@ fun main() {
         println("1. Ver el carrito")
         println("2. Agregar producto al carrito")
         println("3. Remover producto del carrito")
-        println("4. Salir")
+        println("4. Comprar productos en el carrito")
+        println("5. Salir")
 
         print("Seleccione una opción: ")
         val opcion = readLine()?.toIntOrNull()
@@ -70,6 +73,17 @@ fun main() {
                 }
             }
             4 -> {
+                println("\nDesea confirmar la compra?. Escriba si o no")
+                val respuesta = readLine()
+
+                if (respuesta.equals("Si", ignoreCase = true)) {
+                    //Se ejecuta el codigo para la compra
+                    carrito.comprarCarrito()
+                } else{
+                    println("\nCompra cancelada. Puede seguir agregando o eliminando productos")
+                }
+            }
+            5 -> {
                 println("\nSaliendo del programa. ¡Hasta luego!")
                 break
             }

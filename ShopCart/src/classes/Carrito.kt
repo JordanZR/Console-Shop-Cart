@@ -34,6 +34,27 @@ class Carrito {
         }
     }
 
+    fun comprarCarrito(){
+        if (items.isEmpty()) {
+            println("\nEl carrito está vacío.")
+        } else {
+            println("\nProductos comprados:")
+            val nombresVistos = HashSet<String>()
+            for (producto in items) {
+                if (nombresVistos.add(producto.nombre)) {
+                    println("Nombre: ${producto.nombre} - Precio unitario: $${producto.precio} - Cantidad: ${producto.cantidad} - Precio total: $${(producto.precio * producto.cantidad).toFloat()}")
+                }
+            }
+            println("\nCantidad de productos totales: $productos")
+            println("\nPrecio total: $${precioTotal.toFloat()}")
+            println("\nIVA: ${(precioTotal.toFloat() * 0.13).toFloat()}")
+            println("\nPrecio final: ${(precioTotal.toFloat() - precioTotal.toFloat() * 0.13).toFloat()}")
+
+            //Eliminamos los productos del carrito
+            items.clear()
+        }
+    }
+
     fun eliminarProducto(producto: Producto, cantidad: Int){
 
         if(cantidad >= producto.cantidad){
